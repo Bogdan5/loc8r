@@ -1,3 +1,5 @@
+var mongoose = require( 'mongoose' );
+
 /* GET 'home' page */
 module.exports.homelist = function(req, res){
   res.render('locations-list', {
