@@ -1,6 +1,6 @@
 var mongoose = require( 'mongoose' );
 
-var dbURI = 'mongodb://localhost/Loc8r';
+var dbURI = process.env.MONGODB_URI;
 mongoose.connect(dbURI);
 
 var gracefulShutdown = function (msg, callback) {   
@@ -39,4 +39,4 @@ process.on('SIGTERM', function() {
     });
 });
 
-require('./locations');
+require('../controllers/locations');
