@@ -3,6 +3,8 @@ var mongoose = require( 'mongoose' );
 var dbURI = process.env.MONGODB_URI;
 mongoose.connect(dbURI);
 
+// CAPTURE APP TERMINATION / RESTART EVENTS
+// To be called when process is restarted or terminated
 var gracefulShutdown = function (msg, callback) {   
     mongoose.connection.close(function () {   
         console.log('Mongoose disconnected through ' + msg);   
@@ -10,6 +12,7 @@ var gracefulShutdown = function (msg, callback) {
     });
 };
 
+// CONNECTION EVENTS
 mongoose.connection.on('connected', function () {     
     console.log('Mongoose connected to ' + dbURI);      
   });                                                   
@@ -39,4 +42,5 @@ process.on('SIGTERM', function() {
     });
 });
 
-require('../controllers/locations');
+// BRING IN YOUR SCHEMAS & MODELS
+require('./locations');
